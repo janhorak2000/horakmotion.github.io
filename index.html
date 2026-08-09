@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HORAK MOTION — Cinematography &amp; Editing Studio</title>
+<title>Frame &amp; Tone — Cinematography &amp; Editing Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -114,6 +114,24 @@
   header.solid .langswitch button{color:var(--ink-soft);}
   .langswitch button.active{background:var(--ink); color:var(--cream) !important;}
   .navtoggle{display:none;}
+
+  @media(max-width:720px){
+    header{padding:14px 0;}
+    header.solid{padding:12px 0;}
+    nav.wrap{flex-wrap:wrap; row-gap:12px; gap:14px;}
+    .brand{font-size:1rem; flex:none; order:1;}
+    .navright{flex:none; order:2;}
+    .navlinks{
+      order:3; flex-basis:100%; width:100%; min-width:0; gap:22px;
+      overflow-x:auto; -webkit-overflow-scrolling:touch;
+      scrollbar-width:none; -ms-overflow-style:none;
+      justify-content:flex-start; padding:2px 18px;
+      -webkit-mask-image:linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+      mask-image:linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
+    }
+    .navlinks::-webkit-scrollbar{display:none;}
+    .navlinks a{flex:none; white-space:nowrap;}
+  }
 
   /* ---------------------------- hero ---------------------------- */
   .hero{
@@ -261,6 +279,17 @@
   .book-info p{color:var(--ink-soft); font-size:1rem; line-height:1.65; margin-bottom:30px;}
   .book-contact{display:flex; flex-direction:column; gap:10px; font-family:'Space Mono', monospace; font-size:.85rem;}
   .book-contact a{color:var(--ink); border-bottom:1px solid var(--rose); width:fit-content;}
+  .availability{margin-top:20px; padding-top:18px; border-top:1px solid rgba(42,39,51,.14);}
+  .availability-label{
+    font-family:'Space Mono', monospace; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:12px; display:block;
+  }
+  .availability-row{
+    display:flex; gap:14px; align-items:baseline; flex-wrap:wrap;
+    font-family:'Space Mono', monospace; font-size:.82rem; padding:7px 0;
+  }
+  .availability-row .month{font-weight:700; color:var(--ink); min-width:132px;}
+  .availability-row .days{color:var(--ink-soft); line-height:1.5;}
 
   form{display:flex; flex-direction:column; gap:20px;}
   .form-row{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
@@ -279,21 +308,47 @@
 
   /* ---------------------------- about ---------------------------- */
   .about{background:var(--panel);}
-  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start;}
-  @media(max-width:860px){ .about-grid{grid-template-columns:1fr; gap:40px;} }
-  .about h2{font-size:clamp(1.8rem,3.4vw,2.6rem); margin-bottom:22px;}
-  .about p{color:var(--ink-soft); font-size:1rem; line-height:1.7; margin-bottom:18px;}
-  .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:10px;}
-  @media(max-width:520px){ .stats{grid-template-columns:1fr;} }
+  .about-text{max-width:640px; margin-bottom:40px;}
+  .about-text h2{font-size:clamp(1.8rem,3.4vw,2.6rem); margin-bottom:22px;}
+  .about-text p{color:var(--ink-soft); font-size:1rem; line-height:1.7; margin-bottom:18px;}
+
+  .photo-row{
+    display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:44px;
+  }
+  .photo-box{
+    border-radius:var(--radius); overflow:hidden; aspect-ratio:4/5;
+    background:linear-gradient(155deg, var(--periwinkle), var(--rose));
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    border:1px solid rgba(42,39,51,.1);
+  }
+  .photo-box:nth-child(2){ background:linear-gradient(155deg, var(--sage), var(--butter)); }
+  .photo-box img{width:100%; height:100%; object-fit:cover; display:block;}
+  .photo-box-placeholder{
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    font-family:'Space Mono', monospace; font-size:.76rem; color:var(--ink); padding:16px;
+  }
+  .photo-box-placeholder .icon{font-size:1.6rem;}
+  .photo-box-placeholder .tag{font-size:.68rem; letter-spacing:.1em; opacity:.7;}
+
+  @media(max-width:720px){
+    .photo-row{grid-template-columns:1fr 1fr; gap:14px; margin-bottom:36px;}
+    .photo-box{aspect-ratio:1/1;}
+  }
+  @media(max-width:480px){
+    .photo-row{grid-template-columns:1fr; gap:14px;}
+    .photo-box{aspect-ratio:16/9;}
+  }
+
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:16px;}
   .stat{
-    background:var(--cream); border-radius:var(--radius); padding:26px 20px;
+    background:var(--cream); border-radius:var(--radius); padding:22px 18px;
     border:1px solid rgba(42,39,51,.1);
   }
   .stat .num{
-    font-family:'Space Mono', monospace; font-size:1.9rem; font-weight:700; color:var(--ink);
+    font-family:'Space Mono', monospace; font-size:1.7rem; font-weight:700; color:var(--ink);
     display:block; margin-bottom:8px;
   }
-  .stat .lbl{font-size:.8rem; color:var(--ink-soft); line-height:1.4;}
+  .stat .lbl{font-size:.78rem; color:var(--ink-soft); line-height:1.4;}
 
   /* ---------------------------- footer ---------------------------- */
   footer{background:var(--ink); color:var(--cream); padding:70px 0 30px;}
@@ -332,7 +387,7 @@
 
 <header id="siteHeader">
   <nav class="wrap">
-    <a href="#top" class="brand">HORAK MOTION</a>
+    <a href="#top" class="brand">FRAME &amp; TONE</a>
     <div class="navlinks">
       <a href="#services" data-i18n="nav.services">Our Services</a>
       <a href="#samples" data-i18n="nav.samples">Sample Videos</a>
@@ -411,7 +466,7 @@
       <div class="sample-item">
         <div class="video-embed">
           <!-- Swap the video ID after /embed/ for your own YouTube sample -->
-          <iframe src="https://www.youtube-nocookie.com/embed/eZYgR3_5-3s?si=UM3ESYG1_29WpOo_" title="Sample 1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ?rel=0&modestbranding=1" title="Sample 1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="sample-caption">
           <span class="tc">00:01</span>
@@ -420,7 +475,7 @@
       </div>
       <div class="sample-item">
         <div class="video-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/eZYgR3_5-3s?si=UM3ESYG1_29WpOo_" title="Sample 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ?rel=0&modestbranding=1" title="Sample 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="sample-caption">
           <span class="tc">00:02</span>
@@ -429,7 +484,7 @@
       </div>
       <div class="sample-item">
         <div class="video-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/eZYgR3_5-3s?si=UM3ESYG1_29WpOo_" title="Sample 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ?rel=0&modestbranding=1" title="Sample 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="sample-caption">
           <span class="tc">00:03</span>
@@ -502,6 +557,17 @@
           <a href="mailto:hello@frameandtone.com">hello@frameandtone.com</a>
           <span>+1 (555) 014 - 2200</span>
         </div>
+        <div class="availability">
+          <span class="availability-label" data-i18n="book.availLabel">Available dates</span>
+          <div class="availability-row">
+            <span class="month" id="availCurrentMonth">This month</span>
+            <span class="days" id="availCurrentDays">—</span>
+          </div>
+          <div class="availability-row">
+            <span class="month" id="availNextMonth">Next month</span>
+            <span class="days" id="availNextDays">—</span>
+          </div>
+        </div>
       </div>
       <form id="bookForm">
         <div class="form-row">
@@ -543,26 +609,41 @@
 
 <section class="section-pad about" id="about">
   <div class="wrap">
-    <div class="about-grid">
-      <div>
-        <span class="eyebrow" data-i18n="about.eyebrow">ABOUT US</span>
-        <h2 data-i18n="about.title">A small studio, close attention</h2>
-        <p data-i18n="about.p1">Frame &amp; Tone was founded by two friends who couldn't agree on which was more important — the shot or the cut. So we do both. Every project passes through the same hands from first frame to final export.</p>
-        <p data-i18n="about.p2">We work in pastel light and quiet color, chasing footage that feels calm rather than loud. Based in your city, available anywhere.</p>
+    <div class="about-text">
+      <span class="eyebrow" data-i18n="about.eyebrow">ABOUT US</span>
+      <h2 data-i18n="about.title">A small studio, close attention</h2>
+      <p data-i18n="about.p1">Frame &amp; Tone was founded by two friends who couldn't agree on which was more important — the shot or the cut. So we do both. Every project passes through the same hands from first frame to final export.</p>
+      <p data-i18n="about.p2">We work in pastel light and quiet color, chasing footage that feels calm rather than loud. Based in your city, available anywhere.</p>
+    </div>
+
+    <div class="photo-row">
+      <div class="photo-box">
+        <!-- Replace with: <div class="photo-box"><img src="images/photo-1.jpg" alt="Frame & Tone on set"></div> -->
+       <div class="about-image">
+  <img src="pocket4.png" alt="Frame & Tone behind the scenes">
+</div>
       </div>
-      <div class="stats">
-        <div class="stat">
-          <span class="num">8+</span>
-          <span class="lbl" data-i18n="about.stat1">Years behind the camera</span>
+      <div class="photo-box">
+        <!-- Replace with: <div class="photo-box"><img src="images/photo-2.jpg" alt="Frame & Tone behind the scenes"></div> -->
+      <div class="about-image">
+  <img src="mini5pro.png" alt="Frame & Tone behind the scenes">
+</div>
         </div>
-        <div class="stat">
-          <span class="num">120+</span>
-          <span class="lbl" data-i18n="about.stat2">Projects delivered</span>
-        </div>
-        <div class="stat">
-          <span class="num">15</span>
-          <span class="lbl" data-i18n="about.stat3">Awards &amp; selections</span>
-        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="num">8+</span>
+        <span class="lbl" data-i18n="about.stat1">Years behind the camera</span>
+      </div>
+      <div class="stat">
+        <span class="num">120+</span>
+        <span class="lbl" data-i18n="about.stat2">Projects delivered</span>
+      </div>
+      <div class="stat">
+        <span class="num">15</span>
+        <span class="lbl" data-i18n="about.stat3">Awards &amp; selections</span>
       </div>
     </div>
   </div>
@@ -638,11 +719,13 @@ const translations = {
     "pricing.t3.f1":"Multi-day shoot & crew","pricing.t3.f2":"Full edit suite: main film + cuts","pricing.t3.f3":"Color grade, sound design & motion titles","pricing.t3.f4":"Unlimited revisions","pricing.t3.f5":"Dedicated producer","pricing.t3.cta":"Request a quote",
     "pricing.note":"Travel outside the city may incur an additional fee.",
     "book.eyebrow":"BOOK US","book.title":"Let's make something","book.sub":"Tell us about your project and we'll get back to you within 48 hours.",
+    "book.availLabel":"Available dates",
     "book.name":"Your name","book.email":"Email","book.type":"Project type",
     "book.opt1":"Wedding","book.opt2":"Brand / Commercial","book.opt3":"Music Video","book.opt4":"Short Film","book.opt5":"Other",
     "book.date":"Preferred date","book.message":"Tell us about your project","book.submit":"Send request",
     "book.success":"Thanks — we've received your request and will be in touch soon.",
     "about.eyebrow":"ABOUT US","about.title":"A small studio, close attention",
+    "about.imgPlaceholder":"Add your photo here",
     "about.p1":"Frame & Tone was founded by two friends who couldn't agree on which was more important — the shot or the cut. So we do both. Every project passes through the same hands from first frame to final export.",
     "about.p2":"We work in pastel light and quiet color, chasing footage that feels calm rather than loud. Based in your city, available anywhere.",
     "about.stat1":"Years behind the camera","about.stat2":"Projects delivered","about.stat3":"Awards & selections",
@@ -671,11 +754,13 @@ const translations = {
     "pricing.t3.f1":"Rodaje y equipo de varios días","pricing.t3.f2":"Suite de edición completa: película principal + cortes","pricing.t3.f3":"Corrección de color, sonido y títulos animados","pricing.t3.f4":"Revisiones ilimitadas","pricing.t3.f5":"Productor dedicado","pricing.t3.cta":"Solicitar presupuesto",
     "pricing.note":"Los desplazamientos fuera de la ciudad pueden generar un cargo adicional.",
     "book.eyebrow":"RESERVAR","book.title":"Creemos algo juntos","book.sub":"Cuéntanos sobre tu proyecto y te responderemos en un plazo de 48 horas.",
+    "book.availLabel":"Fechas disponibles",
     "book.name":"Tu nombre","book.email":"Correo electrónico","book.type":"Tipo de proyecto",
     "book.opt1":"Boda","book.opt2":"Marca / Comercial","book.opt3":"Videoclip","book.opt4":"Cortometraje","book.opt5":"Otro",
     "book.date":"Fecha preferida","book.message":"Cuéntanos sobre tu proyecto","book.submit":"Enviar solicitud",
     "book.success":"Gracias — hemos recibido tu solicitud y te contactaremos pronto.",
     "about.eyebrow":"SOBRE NOSOTROS","about.title":"Un estudio pequeño, mucha atención",
+    "about.imgPlaceholder":"Añade tu foto aquí",
     "about.p1":"Frame & Tone fue fundado por dos amigos que no se ponían de acuerdo sobre qué era más importante — la toma o el corte. Así que hacemos ambas cosas. Cada proyecto pasa por las mismas manos desde el primer fotograma hasta la exportación final.",
     "about.p2":"Trabajamos con luz pastel y color sereno, buscando imágenes que se sientan tranquilas y no ruidosas. Con base en tu ciudad, disponibles en cualquier lugar.",
     "about.stat1":"Años detrás de la cámara","about.stat2":"Proyectos entregados","about.stat3":"Premios y selecciones",
@@ -704,18 +789,45 @@ const translations = {
     "pricing.t3.f1":"Vícedenní natáčení a štáb","pricing.t3.f2":"Kompletní střihová sada: hlavní film + sestřihy","pricing.t3.f3":"Korekce barev, zvukový design a animované titulky","pricing.t3.f4":"Neomezené úpravy","pricing.t3.f5":"Vlastní produkční","pricing.t3.cta":"Vyžádat nabídku",
     "pricing.note":"Cesty mimo město mohou být zpoplatněny příplatkem.",
     "book.eyebrow":"REZERVACE","book.title":"Pojďme něco natočit","book.sub":"Řekněte nám o svém projektu a ozveme se do 48 hodin.",
+    "book.availLabel":"Dostupné termíny",
     "book.name":"Vaše jméno","book.email":"E-mail","book.type":"Typ projektu",
     "book.opt1":"Svatba","book.opt2":"Značka / Reklama","book.opt3":"Hudební video","book.opt4":"Krátký film","book.opt5":"Jiné",
     "book.date":"Preferované datum","book.message":"Řekněte nám o svém projektu","book.submit":"Odeslat poptávku",
     "book.success":"Děkujeme — vaši poptávku jsme přijali a brzy se ozveme.",
     "about.eyebrow":"O NÁS","about.title":"Malé studio, velká pozornost",
+    "about.imgPlaceholder":"Sem přidejte svou fotku",
     "about.p1":"Frame & Tone založili dva kamarádi, kteří se nemohli shodnout, co je důležitější — záběr, nebo střih. Takže děláme obojí. Každý projekt prochází od prvního záběru až po finální export stejnýma rukama.",
     "about.p2":"Pracujeme v pastelovém světle a tichých barvách a hledáme záběry, které působí klidně, ne hlasitě. Sídlíme ve vašem městě, dostupní kdekoli.",
     "about.stat1":"Let za kamerou","about.stat2":"Dokončených projektů","about.stat3":"Ocenění a výběrů",
     "footer.tagline":"Kameramanská práce a střih, dělané s péčí.","footer.studio":"Studio","footer.social":"Sítě",
-    "footer.rights":"© 2026 HORAK MOTION. Všechna práva vyhrazena."
+    "footer.rights":"© 2026 Frame & Tone. Všechna práva vyhrazena."
   }
 };
+
+/* ---------------------------------------------------------------
+   Booking availability (Book Us section).
+   Just update the two day-number arrays below whenever your
+   schedule changes — month names and the year update themselves
+   automatically, and switch language automatically too.
+--------------------------------------------------------------- */
+const AVAILABILITY = {
+  currentMonthDays: [3, 4, 10, 11, 17, 18, 24, 25],
+  nextMonthDays:    [1, 2, 8, 9, 15, 16, 22, 23, 29, 30]
+};
+const MONTH_LOCALES = { en: 'en-US', es: 'es-ES', cs: 'cs-CZ' };
+
+function renderAvailability(lang){
+  const locale = MONTH_LOCALES[lang] || 'en-US';
+  const now = new Date();
+  const cur = new Date(now.getFullYear(), now.getMonth(), 1);
+  const next = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+  const fmt = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' });
+
+  document.getElementById('availCurrentMonth').textContent = fmt.format(cur);
+  document.getElementById('availNextMonth').textContent = fmt.format(next);
+  document.getElementById('availCurrentDays').textContent = AVAILABILITY.currentMonthDays.join(', ');
+  document.getElementById('availNextDays').textContent = AVAILABILITY.nextMonthDays.join(', ');
+}
 
 function setLanguage(lang){
   if(!translations[lang]) lang = 'en';
@@ -728,6 +840,7 @@ function setLanguage(lang){
   document.querySelectorAll('[data-langswitch] button').forEach(btn=>{
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
+  renderAvailability(lang);
   try{ localStorage.setItem('ft_lang', lang); }catch(e){}
 }
 
@@ -735,8 +848,27 @@ document.querySelectorAll('[data-langswitch] button').forEach(btn=>{
   btn.addEventListener('click', ()=> setLanguage(btn.getAttribute('data-lang')));
 });
 
-let savedLang = 'en';
-try{ savedLang = localStorage.getItem('ft_lang') || 'en'; }catch(e){}
+function detectLanguage(){
+  // Respect a manual choice from a previous visit first
+  try{
+    const stored = localStorage.getItem('ft_lang');
+    if(stored && translations[stored]) return stored;
+  }catch(e){}
+
+  // Otherwise infer from the visitor's browser/system language
+  const browserLangs = navigator.languages && navigator.languages.length
+    ? navigator.languages
+    : [navigator.language || navigator.userLanguage || 'en'];
+
+  for(const raw of browserLangs){
+    const code = raw.toLowerCase().slice(0, 2);
+    if(code === 'es') return 'es';
+    if(code === 'cs') return 'cs';
+  }
+  return 'en';
+}
+
+const savedLang = detectLanguage();
 setLanguage(savedLang);
 
 /* ---------------------------------------------------------------
@@ -744,7 +876,7 @@ setLanguage(savedLang);
    Swap HERO_VIDEO_ID below for your own YouTube video's ID —
    the part after "watch?v=" in its URL.
 --------------------------------------------------------------- */
-const HERO_VIDEO_ID = "eZYgR3_5-3s";
+const HERO_VIDEO_ID = "aqz-KE-bpKQ";
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if(!reduceMotion){
@@ -758,7 +890,8 @@ window.onYouTubeIframeAPIReady = function(){
     playerVars: {
       autoplay: 1, mute: 1, loop: 1, playlist: HERO_VIDEO_ID,
       controls: 0, disablekb: 1, fs: 0, modestbranding: 1,
-      rel: 0, iv_load_policy: 3, playsinline: 1
+      rel: 0, iv_load_policy: 3, playsinline: 1,
+      origin: window.location.origin
     },
     events: {
       onReady: function(e){ e.target.mute(); e.target.playVideo(); }
