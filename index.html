@@ -232,8 +232,20 @@
   .sample-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
   @media(max-width:860px){ .sample-grid{grid-template-columns:1fr; max-width:520px; margin:0 auto;} }
   .sample-item{background:var(--cream); border-radius:var(--radius); overflow:hidden; border:1px solid rgba(42,39,51,.1);}
-  .video-embed{position:relative; width:100%; padding-bottom:56.25%; background:#1E1B26;}
+  .video-embed{position:relative; width:100%; padding-bottom:56.25%; background:#1E1B26; background-size:cover; background-position:center; cursor:pointer;}
   .video-embed iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+  .video-embed::before{
+    content:''; position:absolute; inset:0; background:rgba(24,21,31,.22); transition:background .2s ease;
+  }
+  .video-embed.is-playing::before{content:none;}
+  .video-embed .play-btn{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:58px; height:58px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(245,244,248,.94); display:flex; align-items:center; justify-content:center;
+    transition:transform .2s ease, background .2s ease; z-index:1;
+  }
+  .video-embed:hover .play-btn{transform:translate(-50%,-50%) scale(1.08); background:var(--cream);}
+  .video-embed .play-btn svg{width:18px; height:18px; margin-left:3px; fill:var(--ink);}
   .sample-caption{padding:16px 18px;}
   .sample-caption .tc{
     font-family:'Space Mono', monospace; font-size:.7rem; color:var(--ink-soft); letter-spacing:.06em; display:block; margin-bottom:6px;
@@ -464,9 +476,11 @@
     </div>
     <div class="sample-grid">
       <div class="sample-item">
-        <div class="video-embed">
-          <!-- Swap the video ID after /embed/ for your own YouTube sample -->
-          <iframe src="https://www.youtube-nocookie.com/embed/eZYgR3_5-3s?rel=0&modestbranding=1" title="Sample 1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- Swap the video ID here for your own YouTube sample -->
+        <div class="video-embed" data-video-id="eZYgR3_5-3s" style="background-image:url('https://img.youtube.com/vi/eZYgR3_5-3s/hqdefault.jpg')">
+          <button class="play-btn" type="button" aria-label="Play video">
+            <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+          </button>
         </div>
         <div class="sample-caption">
           <span class="tc">00:01</span>
@@ -474,8 +488,10 @@
         </div>
       </div>
       <div class="sample-item">
-        <div class="video-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/eZYgR3_5-3s?rel=0&modestbranding=1" title="Sample 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video-embed" data-video-id="eZYgR3_5-3s" style="background-image:url('https://img.youtube.com/vi/eZYgR3_5-3s/hqdefault.jpg')">
+          <button class="play-btn" type="button" aria-label="Play video">
+            <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+          </button>
         </div>
         <div class="sample-caption">
           <span class="tc">00:02</span>
@@ -483,8 +499,10 @@
         </div>
       </div>
       <div class="sample-item">
-        <div class="video-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ?rel=0&modestbranding=1" title="Sample 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video-embed" data-video-id="aqz-KE-bpKQ" style="background-image:url('https://img.youtube.com/vi/aqz-KE-bpKQ/hqdefault.jpg')">
+          <button class="play-btn" type="button" aria-label="Play video">
+            <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
+          </button>
         </div>
         <div class="sample-caption">
           <span class="tc">00:03</span>
@@ -570,7 +588,6 @@
           </div>
         </div>
       </div>
-      <!-- Replace YOUR_FORM_ID below with the endpoint Formspree gives you -->
       <form id="bookForm" action="https://formspree.io/f/meajagko" method="POST">
         <div class="form-row">
           <div class="field">
@@ -913,6 +930,24 @@ window.onYouTubeIframeAPIReady = function(){
     }
   });
 };
+
+/* sample videos — click a thumbnail to load and autoplay the real embed */
+document.querySelectorAll('.video-embed[data-video-id]').forEach(el=>{
+  el.addEventListener('click', function(){
+    const id = this.getAttribute('data-video-id');
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+    iframe.title = 'Sample video';
+    iframe.loading = 'lazy';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    this.classList.add('is-playing');
+    this.style.backgroundImage = 'none';
+    this.style.cursor = 'default';
+    this.innerHTML = '';
+    this.appendChild(iframe);
+  }, { once: true });
+});
 
 /* header solid-on-scroll + scrubber fill */
 const header = document.getElementById('siteHeader');
