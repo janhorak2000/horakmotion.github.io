@@ -9,14 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:      #F5F4F8;   /* pastel-cool off-white, page base   */
-    --panel:      #EEEBF3;   /* slightly deeper lavender panel     */
-    --ink:        #2A2733;   /* near-black plum, primary text      */
-    --ink-soft:   #5C5867;   /* secondary text                     */
-    --periwinkle: #B9C4E8;   /* pastel primary accent              */
-    --rose:       #EFC1C6;   /* pastel secondary accent / CTA      */
-    --sage:       #C7DFC9;   /* pastel tertiary accent             */
-    --butter:     #F3E1B0;   /* pastel quaternary accent           */
+    --cream:      #F5F4F8;
+    --panel:      #EEEBF3;
+    --ink:        #2A2733;
+    --ink-soft:   #5C5867;
+    --periwinkle: #B9C4E8;
+    --rose:       #EFC1C6;
+    --sage:       #C7DFC9;
+    --butter:     #F3E1B0;
     --overlay:    rgba(24,21,31,.56);
     --radius:     6px;
     --maxw:       1180px;
@@ -56,7 +56,6 @@
   .section-pad{padding:110px 0;}
   @media(max-width:720px){ .section-pad{padding:72px 0;} }
 
-  /* ---------- scrubber (scroll progress, signature element) ---------- */
   .scrubber{
     position:fixed; top:0; left:0; right:0; height:3px; z-index:200;
     background:rgba(42,39,51,.08);
@@ -72,7 +71,6 @@
     box-shadow:0 0 0 3px var(--cream);
   }
 
-  /* ---------------------------- nav ---------------------------- */
   header{
     position:fixed; top:3px; left:0; right:0; z-index:150;
     padding:22px 0; transition:background .35s ease, padding .35s ease, box-shadow .35s ease;
@@ -133,12 +131,10 @@
     .navlinks a{flex:none; white-space:nowrap;}
   }
 
-  /* ---------------------------- hero ---------------------------- */
   .hero{
     position:relative; height:100vh; min-height:560px; overflow:hidden;
     display:flex; align-items:flex-end;
     color:var(--cream);
-    /* fallback backdrop while the YouTube player loads (or if it's blocked) */
     background:linear-gradient(160deg, #3B3650 0%, #2A2733 60%, #201D28 100%);
   }
   .yt-bg-wrap{
@@ -146,8 +142,8 @@
   }
   .yt-bg-wrap iframe, .yt-bg-wrap #heroYtPlayer{
     position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(1.5);
-    width:100vw; height:56.25vw;        /* 16:9 */
-    min-height:100vh; min-width:177.78vh; /* keeps the frame covering the viewport at any ratio */
+    width:100vw; height:56.25vw;
+    min-height:100vh; min-width:177.78vh;
     border:0;
   }
   .hero::before{
@@ -201,7 +197,6 @@
   }
   @keyframes drop{ 0%{top:-28px;} 100%{top:28px;} }
 
-  /* ---------------------------- services ---------------------------- */
   .section-head{max-width:560px; margin-bottom:56px;}
   .section-head .eyebrow{color:var(--ink-soft); margin-bottom:14px;}
   .section-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem); margin-bottom:14px;}
@@ -227,7 +222,6 @@
   .service-card h3{font-size:1.15rem; margin-bottom:12px; font-weight:600;}
   .service-card p{color:var(--ink-soft); font-size:.92rem; line-height:1.6;}
 
-  /* ---------------------------- sample videos ---------------------------- */
   .samples{background:var(--panel);}
   .sample-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
   @media(max-width:860px){ .sample-grid{grid-template-columns:1fr; max-width:520px; margin:0 auto;} }
@@ -252,7 +246,6 @@
   }
   .sample-caption h3{font-size:1rem; font-weight:600;}
 
-  /* ---------------------------- pricing ---------------------------- */
   .pricing{background:var(--panel);}
   .price-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
   @media(max-width:900px){ .price-grid{grid-template-columns:1fr; max-width:440px; margin:0 auto;} }
@@ -265,8 +258,15 @@
     transform:translateY(-14px);
   }
   @media(max-width:900px){ .price-card.featured{transform:none;} }
-  .price-card .tier-name{font-family:'Fraunces', serif; font-size:1.3rem; margin-bottom:6px; font-weight:600;}
-  .price-card .tier-price{font-family:'Fraunces', serif; font-size:2.2rem; margin-bottom:18px;}
+  .price-card .tier-name{font-family:'Fraunces', serif; font-size:1.3rem; margin-bottom:6px; font-weight:600; display:block;}
+  .price-card .tier-price{font-family:'Fraunces', serif; font-size:1.7rem; display:block;}
+  .price-card .tier-price.old{font-size:1.1rem; opacity:.6; margin-bottom:2px;}
+  .price-card .tier-price.new{margin-bottom:6px;}
+  .price-card .price-note{
+    display:block; font-family:'Space Mono', monospace; font-size:.72rem;
+    color:var(--ink-soft); margin-bottom:20px;
+  }
+  .price-card.featured .price-note{color:#D9D7E1;}
   .price-card .tier-desc{
     font-size:.9rem; line-height:1.6; margin-bottom:26px;
     color:var(--ink-soft);
@@ -278,12 +278,11 @@
   }
   .price-card li::before{content:'▸'; color:var(--rose); flex:none;}
   .price-card .btn{justify-content:center; width:100%;}
-  .price-note{
+  .price-note-footer{
     margin-top:34px; text-align:center; font-size:.82rem; color:var(--ink-soft);
     font-family:'Space Mono', monospace;
   }
 
-  /* ---------------------------- book us ---------------------------- */
   .book-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:70px; align-items:start;}
   @media(max-width:860px){ .book-grid{grid-template-columns:1fr; gap:48px;} }
   .book-info .eyebrow{color:var(--ink-soft); margin-bottom:14px;}
@@ -318,7 +317,6 @@
   .form-msg{font-size:.85rem; color:var(--ink-soft); display:none;}
   .form-msg.show{display:block;}
 
-  /* ---------------------------- about ---------------------------- */
   .about{background:var(--panel);}
   .about-text{max-width:640px; margin-bottom:40px;}
   .about-text h2{font-size:clamp(1.8rem,3.4vw,2.6rem); margin-bottom:22px;}
@@ -362,7 +360,6 @@
   }
   .stat .lbl{font-size:.78rem; color:var(--ink-soft); line-height:1.4;}
 
-  /* ---------------------------- footer ---------------------------- */
   footer{background:var(--ink); color:var(--cream); padding:70px 0 30px;}
   .foot-top{
     display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap;
@@ -418,7 +415,6 @@
 </header>
 
 <section class="hero" id="top">
-  <!-- Placeholder showreel loop — swap HERO_VIDEO_ID in the script below for your own YouTube video -->
   <div class="yt-bg-wrap"><div id="heroYtPlayer"></div></div>
   <div class="hero-content">
     <div class="wrap">
@@ -476,7 +472,6 @@
     </div>
     <div class="sample-grid">
       <div class="sample-item">
-        <!-- Swap the video ID here for your own YouTube sample -->
         <div class="video-embed" data-video-id="rSBKluL-xIY" style="background-image:url('https://img.youtube.com/vi/rSBKluL-xIY/hqdefault.jpg')">
           <button class="play-btn" type="button" aria-label="Play video">
             <svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8V4z"/></svg>
@@ -522,13 +517,14 @@
     </div>
     <div class="price-grid">
       <div class="price-card">
-       <span class="tier-name" data-i18n="pricing.t1.name">Video Promotion</span>
-        <span class="tier-price"><s>€299</s></span>
-        <span class="tier-price">€99 (introducory price for first 3 customers)</span>
+        <span class="tier-name" data-i18n="pricing.t1.name">Video Promotion</span>
+        <span class="tier-price old"><s>€299</s></span>
+        <span class="tier-price new">€99</span>
+        <span class="price-note" data-i18n="pricing.t1.priceNote">(introductory price for first 3 customers)</span>
         <p class="tier-desc" data-i18n="pricing.t1.desc">Up to 3 hours of production with a polished final edit — ideal for hotel or real estate video promotion.</p>
         <ul>
           <li data-i18n="pricing.t1.f1">Up to 3-hour shoot</li>
-          <li data-i18n="pricing.t1.f2">1 high-definition clip in 4K in horizontal format with duration about 60 seconds</li>
+          <li data-i18n="pricing.t1.f2">1 high-definition clip in 4K in horizontal format, about 60 seconds long</li>
           <li data-i18n="pricing.t1.f3">1 portrait reel cut from the main video — perfect for Instagram Stories</li>
           <li data-i18n="pricing.t1.f4">Color grading included</li>
            <li data-i18n="pricing.t1.f5">1 round of revisions</li>
@@ -537,10 +533,11 @@
         <a href="#book" class="btn btn-dark" data-i18n="pricing.t1.cta">Choose Video Promotion</a>
       </div>
       <div class="price-card featured">
-       <span class="tier-name" data-i18n="pricing.t2.name">Video Memory</span>
-        <span class="tier-price"><s>€699</s></span>
-          <span class="tier-price">€299 (introducory price for first 3 customers)</span>
-        <p class="tier-desc" data-i18n="pricing.t2.desc">A single day or night of shooting, delivered as two edits — a longer film and a short reel. Perfect for WEDDING, COMPANY PARTY, BIRTHDAY PARTY and other multi-hour events.</p>
+        <span class="tier-name" data-i18n="pricing.t2.name">Video Memory</span>
+        <span class="tier-price old"><s>€699</s></span>
+        <span class="tier-price new">€299</span>
+        <span class="price-note" data-i18n="pricing.t2.priceNote">(introductory price for first 3 customers)</span>
+        <p class="tier-desc" data-i18n="pricing.t2.desc">A single day or night of shooting, delivered as two edits — a longer film and a short reel. Perfect for WEDDINGS, COMPANY PARTIES, BIRTHDAY PARTIES and other multi-hour events.</p>
         <ul>
           <li data-i18n="pricing.t2.f1">Up to 6 hours on set</li>
           <li data-i18n="pricing.t2.f2">2 edited videos (a 3–5 minute film in 4K, plus a 30–60s reel in portrait aspect ratio)</li>
@@ -551,8 +548,9 @@
       </div>
       <div class="price-card">
         <span class="tier-name" data-i18n="pricing.t3.name">Small Business Video</span>
-        <span class="tier-price" data-i18n="pricing.t3.price"><s>€149</s></span>
-          <span class="tier-price">€79 (introducory price for first 3 customers)</span>
+        <span class="tier-price old" data-i18n="pricing.t3.price"><s>€149</s></span>
+        <span class="tier-price new">€79</span>
+        <span class="price-note" data-i18n="pricing.t3.priceNote">(introductory price for first 3 customers)</span>
         <p class="tier-desc" data-i18n="pricing.t3.desc">A quick 1-hour shoot, ideal for small businesses like restaurants or beauty studios.</p>
         <ul>
           <li data-i18n="pricing.t3.f1">Quick shoot</li>
@@ -564,7 +562,7 @@
         <a href="#book" class="btn btn-dark" data-i18n="pricing.t3.cta">Choose Small Business Video</a>
       </div>
     </div>
-    <p class="price-note" data-i18n="pricing.note">For drone shots: please book at least 14 days in advance so we can comply with Spanish regulations and obtain the necessary authorisations. Drone footage can't be guaranteed if authorisation from Spanish authorities doesn't come through in time.</p>
+    <p class="price-note-footer" data-i18n="pricing.note">For drone shots: please book at least 14 days in advance so we can comply with Spanish regulations and obtain the necessary authorisations. Drone footage can't be guaranteed if authorisation from Spanish authorities doesn't come through in time.</p>
   </div>
 </section>
 
@@ -633,38 +631,34 @@
   <div class="wrap">
     <div class="about-text">
       <span class="eyebrow" data-i18n="about.eyebrow">ABOUT US</span>
-      <h2 data-i18n="about.title">A small 1 man studio, close attention, maximum discretion</h2>
-      <p data-i18n="about.p1">HORAK MOTION was founded by me, Jan Horak, who loves movies and found passion in shooting videos and edit them - both are very important aspects of filming and in my opinion it is better when it is done by 1 person who does not need to explain his vision for final cut. Every project passes through the same hands from first frame to final export.</p>
-      <p data-i18n="about.p2">Forget big cameras and other clunky tools. We use only small pocket camera (DJI Osmo Pocket 4 - first photo) and drone (DJI Mini 5 Pro - second photo). Thanks to this our prices are very competetive and our work on every event is very discreet. Of course we will need to direct people sometimes to make some memorable shots, but nobody will trip over our equipment. Thanks to set of ND filters, camera settings and final cut with colour grading, we will provide footage which feels cinematic. Don't hesitate to book us and get a video from your event, real estate or business which will feel like Netflix movie. We operate everywhere in Andalucia and travel costs are included in our prices.</p>
+      <h2 data-i18n="about.title">A one-man studio, close attention, maximum discretion</h2>
+      <p data-i18n="about.p1">HORAK MOTION was founded by me, Jan Horak. I love movies, and I found my passion in both shooting and editing video — two very different but equally important sides of filmmaking. In my opinion, it works best when one person handles both, without having to explain his vision to someone else for the final cut. Every project passes through the same hands, from the first frame to the final export.</p>
+      <p data-i18n="about.p2">Forget big cameras and other clunky gear. We shoot with just a small pocket camera (DJI Osmo Pocket 4 — first photo) and a drone (DJI Mini 5 Pro — second photo). That keeps our prices very competitive and our presence at every event very discreet. Of course, we'll sometimes direct people to capture a memorable shot, but nobody will be tripping over our equipment. With a set of ND filters, careful camera settings and color grading in the final cut, we deliver footage that feels genuinely cinematic. Don't hesitate to book us for a video of your event, property or business that feels like a Netflix movie. We work throughout Andalucía, and travel costs are included in our prices.</p>
     </div>
 
     <div class="photo-row">
       <div class="photo-box">
-        <!-- Replace with your own file: <div class="photo-box"><img src="pocket4.png" alt="Horak Motion on set"></div> -->
         <img src="pocket4.png" alt="Horak Motion - camera we use">
       </div>
       <div class="photo-box">
-        <!-- Replace with your own file: <div class="photo-box"><img src="mini5pro.png" alt="Horak Motion on set"></div> -->
         <img src="mini5pro.png" alt="Horak Motion - drone we use">
       </div>
     </div>
 
     <div class="about-text">
-      <p data-i18n="about.p3">I am certified drone pilot and I follow Spanish regulations for shooting with drone. If you want drone shots included in your video, we need at least 14 days to make sure we can obtain necessary authorisation to fly.</p>
+      <p data-i18n="about.p3">I'm a certified drone pilot and follow Spanish regulations for drone filming. If you'd like drone shots included in your video, please book at least 14 days ahead so we have time to obtain the necessary flight authorisation.</p>
     </div>
 
     <div class="photo-row">
       <div class="photo-box">
-        <!-- Replace with: <div class="photo-box"><img src="images/photo-3.jpg" alt="Horak Motion on set"></div> -->
-       <img src="cert.png" alt="Horak Motion - our drone pilot certificate"></div>
-        </div>
+        <img src="cert.png" alt="Horak Motion - our drone pilot certificate">
       </div>
     </div>
 
     <div class="stats">
       <div class="stat">
         <span class="num">1</span>
-        <span class="lbl" data-i18n="about.stat1">person behind camera and editing software</span>
+        <span class="lbl" data-i18n="about.stat1">person behind the camera and the editing software</span>
       </div>
       <div class="stat">
         <span class="num">2</span>
@@ -672,7 +666,7 @@
       </div>
       <div class="stat">
         <span class="num">3-5</span>
-        <span class="lbl" data-i18n="about.stat3">minutes of cinematic footage from your amazing day (aplicable for VIDEO MEMORY price tier)</span>
+        <span class="lbl" data-i18n="about.stat3">minutes of cinematic footage from your amazing day (for the Video Memory package)</span>
       </div>
     </div>
   </div>
@@ -707,7 +701,6 @@
           <h4 data-i18n="footer.social">Social</h4>
           <ul>
             <li><a href="#">Instagram</a></li>
-          
             <li><a href="#">YouTube</a></li>
           </ul>
         </div>
@@ -729,7 +722,7 @@ const translations = {
   en: {
     "nav.services":"Our Services","nav.samples":"Sample Videos","nav.pricing":"Pricing","nav.book":"Book Us","nav.about":"About Us",
     "samples.eyebrow":"SAMPLE VIDEOS","samples.title":"See our work","samples.sub":"A few recent projects, straight from the edit bay.",
-    "samples.v1":"Wedding Film","samples.v2":"Travel Film","samples.v3":"Music Video",
+    "samples.v1":"Birthday Film","samples.v2":"Travel Film","samples.v3":"Motion Design Reel",
     "hero.rec":"REC","hero.eyebrow":"CINEMATOGRAPHY & EDITING STUDIO",
     "hero.title1":"We shoot the moment.","hero.title2":"We shape the story.",
     "hero.sub":"A small studio crafting wedding films, real estate videos, brand stories and music videos — shot with intention, cut with rhythm.",
@@ -740,11 +733,14 @@ const translations = {
     "services.s3.title":"Color Grading","services.s3.desc":"Custom color grades that give every project a consistent, cinematic look. Want your video to look like it was made by Wes Anderson? No problem.",
     "services.s4.title":"Motion & Sound","services.s4.desc":"Titles, motion graphics and sound design to finish the story.",
     "pricing.eyebrow":"PRICING","pricing.title":"Packages","pricing.sub":"Simple pricing, no hidden cuts.",
-    "pricing.t1.name":"Video Memory","pricing.t1.desc":"A single day or night of shooting, delivered as two edits — a longer film and a short reel. Perfect for weddings, company parties and other multi-hour events.",
-    "pricing.t1.f1":"Up to 6 hours on set","pricing.t1.f2":"2 edited videos (a 3–5 minute film, plus a 30–60s reel)","pricing.t1.f3":"2 rounds of revisions","pricing.t1.f4":"Delivered in 15 business days","pricing.t1.cta":"Choose Video Memory",
-    "pricing.t2.name":"Video Promotion","pricing.t2.desc":"Up to 3 hours of production with a polished final edit — ideal for hotel or real estate video promotion.",
-    "pricing.t2.f1":"Up to 3-hour shoot","pricing.t2.f2":"1 high-definition clip in horizontal format","pricing.t2.f3":"1 portrait reel cut from the main video — perfect for Instagram Stories","pricing.t2.f4":"Color grading included","pricing.t2.f5":"1 round of revisions","pricing.t2.f6":"Delivered in 10 business days","pricing.t2.cta":"Choose Video Promotion",
-    "pricing.t3.name":"Small Business Video","pricing.t3.price":"€149","pricing.t3.desc":"A quick 1-hour shoot, ideal for small businesses like restaurants or beauty studios.",
+    "pricing.t1.name":"Video Promotion","pricing.t1.priceNote":"(introductory price for first 3 customers)",
+    "pricing.t1.desc":"Up to 3 hours of production with a polished final edit — ideal for hotel or real estate video promotion.",
+    "pricing.t1.f1":"Up to 3-hour shoot","pricing.t1.f2":"1 high-definition clip in 4K in horizontal format, about 60 seconds long","pricing.t1.f3":"1 portrait reel cut from the main video — perfect for Instagram Stories","pricing.t1.f4":"Color grading included","pricing.t1.f5":"1 round of revisions","pricing.t1.f6":"Delivered in 10 business days","pricing.t1.cta":"Choose Video Promotion",
+    "pricing.t2.name":"Video Memory","pricing.t2.priceNote":"(introductory price for first 3 customers)",
+    "pricing.t2.desc":"A single day or night of shooting, delivered as two edits — a longer film and a short reel. Perfect for WEDDINGS, COMPANY PARTIES, BIRTHDAY PARTIES and other multi-hour events.",
+    "pricing.t2.f1":"Up to 6 hours on set","pricing.t2.f2":"2 edited videos (a 3–5 minute film in 4K, plus a 30–60s reel in portrait aspect ratio)","pricing.t2.f3":"2 rounds of revisions","pricing.t2.f4":"Delivered in 15 business days","pricing.t2.cta":"Choose Video Memory",
+    "pricing.t3.name":"Small Business Video","pricing.t3.price":"<s>€149</s>","pricing.t3.priceNote":"(introductory price for first 3 customers)",
+    "pricing.t3.desc":"A quick 1-hour shoot, ideal for small businesses like restaurants or beauty studios.",
     "pricing.t3.f1":"Quick shoot","pricing.t3.f2":"Fully edited into a 30-second reel","pricing.t3.f3":"Delivered in both horizontal and portrait format","pricing.t3.f4":"1 round of revisions","pricing.t3.f5":"Delivered in 10 business days","pricing.t3.cta":"Choose Small Business Video",
     "pricing.note":"For drone shots: please book at least 14 days in advance so we can comply with Spanish regulations and obtain the necessary authorisations. Drone footage can't be guaranteed if authorisation from Spanish authorities doesn't come through in time.",
     "book.eyebrow":"BOOK US","book.title":"Let's make something","book.sub":"Tell us about your project and we'll get back to you within 48 hours.",
@@ -753,19 +749,19 @@ const translations = {
     "book.opt1":"Wedding","book.opt2":"Brand / Commercial","book.opt3":"Music Video","book.opt4":"Short Film","book.opt5":"Other",
     "book.date":"Preferred date","book.message":"Tell us about your project","book.submit":"Send request",
     "book.success":"Thanks — we've received your request and will be in touch soon.",
-    "about.eyebrow":"ABOUT US","about.title":"A small studio, close attention",
+    "about.eyebrow":"ABOUT US","about.title":"A one-man studio, close attention, maximum discretion",
     "about.imgPlaceholder":"Add your photo here",
-    "about.p1":"Frame & Tone was founded by two friends who couldn't agree on which was more important — the shot or the cut. So we do both. Every project passes through the same hands from first frame to final export.",
-    "about.p2":"We work in pastel light and quiet color, chasing footage that feels calm rather than loud. Based in your city, available anywhere.",
-    "about.p3":"Every project gets the same care, whether it's a full wedding weekend or a half-day shoot for a local business. Light gear, a quick setup, and a lot of attention on the moments that actually matter.",
-    "about.stat1":"Years behind the camera","about.stat2":"Projects delivered","about.stat3":"Awards & selections",
+    "about.p1":"HORAK MOTION was founded by me, Jan Horak. I love movies, and I found my passion in both shooting and editing video — two very different but equally important sides of filmmaking. In my opinion, it works best when one person handles both, without having to explain his vision to someone else for the final cut. Every project passes through the same hands, from the first frame to the final export.",
+    "about.p2":"Forget big cameras and other clunky gear. We shoot with just a small pocket camera (DJI Osmo Pocket 4 — first photo) and a drone (DJI Mini 5 Pro — second photo). That keeps our prices very competitive and our presence at every event very discreet. Of course, we'll sometimes direct people to capture a memorable shot, but nobody will be tripping over our equipment. With a set of ND filters, careful camera settings and color grading in the final cut, we deliver footage that feels genuinely cinematic. Don't hesitate to book us for a video of your event, property or business that feels like a Netflix movie. We work throughout Andalucía, and travel costs are included in our prices.",
+    "about.p3":"I'm a certified drone pilot and follow Spanish regulations for drone filming. If you'd like drone shots included in your video, please book at least 14 days ahead so we have time to obtain the necessary flight authorisation.",
+    "about.stat1":"person behind the camera and the editing software","about.stat2":"weeks from first shot to final video","about.stat3":"minutes of cinematic footage from your amazing day (for the Video Memory package)",
     "footer.tagline":"Cinematography & editing, made with care.","footer.studio":"Studio","footer.social":"Social",
-    "footer.rights":"© 2026 Frame & Tone. All rights reserved."
+    "footer.rights":"© 2026 HORAK MOTION. All rights reserved."
   },
   es: {
     "nav.services":"Servicios","nav.samples":"Videos de muestra","nav.pricing":"Precios","nav.book":"Reservar","nav.about":"Sobre nosotros",
     "samples.eyebrow":"VIDEOS DE MUESTRA","samples.title":"Mira nuestro trabajo","samples.sub":"Algunos proyectos recientes, directamente de la sala de edición.",
-    "samples.v1":"Película de boda","samples.v2":"Vídeo de viaje","samples.v3":"Videoclip musical",
+    "samples.v1":"Película de cumpleaños","samples.v2":"Vídeo de viaje","samples.v3":"Reel de motion design",
     "hero.rec":"REC","hero.eyebrow":"ESTUDIO DE CINEMATOGRAFÍA Y EDICIÓN",
     "hero.title1":"Filmamos el momento.","hero.title2":"Damos forma a la historia.",
     "hero.sub":"Un estudio pequeño que crea películas de boda, vídeos inmobiliarios, historias de marca y videoclips — filmados con intención, editados con ritmo.",
@@ -776,11 +772,14 @@ const translations = {
     "services.s3.title":"Corrección de color","services.s3.desc":"Gradaciones de color personalizadas que dan a cada proyecto un look cinematográfico coherente. ¿Quieres que tu vídeo parezca hecho por Wes Anderson? Sin problema.",
     "services.s4.title":"Motion y sonido","services.s4.desc":"Títulos, motion graphics y diseño de sonido para terminar la historia.",
     "pricing.eyebrow":"PRECIOS","pricing.title":"Paquetes","pricing.sub":"Precios simples, sin cortes ocultos.",
-    "pricing.t1.name":"Recuerdo en Vídeo","pricing.t1.desc":"Un día o noche de rodaje, entregado en dos ediciones — una película más larga y un reel corto. Perfecto para bodas, fiestas de empresa y otros eventos de varias horas.",
-    "pricing.t1.f1":"Hasta 6 horas de rodaje","pricing.t1.f2":"2 vídeos editados (película de 3–5 minutos, más un reel de 30–60 s)","pricing.t1.f3":"2 rondas de revisión","pricing.t1.f4":"Entrega en 15 días hábiles","pricing.t1.cta":"Elegir Recuerdo en Vídeo",
-    "pricing.t2.name":"Promoción en Vídeo","pricing.t2.desc":"Hasta 3 horas de producción con una edición final pulida — ideal para promoción de hoteles o inmuebles.",
-    "pricing.t2.f1":"Rodaje de hasta 3 horas","pricing.t2.f2":"1 clip en alta definición en formato horizontal","pricing.t2.f3":"1 reel vertical extraído del vídeo principal — perfecto para historias de Instagram","pricing.t2.f4":"Corrección de color incluida","pricing.t2.f5":"1 ronda de revisión","pricing.t2.f6":"Entrega en 10 días hábiles","pricing.t2.cta":"Elegir Promoción en Vídeo",
-    "pricing.t3.name":"Vídeo para Pequeños Negocios","pricing.t3.price":"€149","pricing.t3.desc":"Un rodaje rápido de 1 hora, ideal para pequeños negocios como restaurantes o centros de estética.",
+    "pricing.t1.name":"Promoción en Vídeo","pricing.t1.priceNote":"(precio de lanzamiento para los 3 primeros clientes)",
+    "pricing.t1.desc":"Hasta 3 horas de producción con una edición final pulida — ideal para promoción de hoteles o inmuebles.",
+    "pricing.t1.f1":"Rodaje de hasta 3 horas","pricing.t1.f2":"1 clip en alta definición 4K en formato horizontal, de aproximadamente 60 segundos","pricing.t1.f3":"1 reel vertical extraído del vídeo principal — perfecto para historias de Instagram","pricing.t1.f4":"Corrección de color incluida","pricing.t1.f5":"1 ronda de revisión","pricing.t1.f6":"Entrega en 10 días hábiles","pricing.t1.cta":"Elegir Promoción en Vídeo",
+    "pricing.t2.name":"Recuerdo en Vídeo","pricing.t2.priceNote":"(precio de lanzamiento para los 3 primeros clientes)",
+    "pricing.t2.desc":"Un día o noche de rodaje, entregado en dos ediciones — una película más larga y un reel corto. Perfecto para BODAS, FIESTAS DE EMPRESA, FIESTAS DE CUMPLEAÑOS y otros eventos de varias horas.",
+    "pricing.t2.f1":"Hasta 6 horas de rodaje","pricing.t2.f2":"2 vídeos editados (película de 3–5 minutos en 4K, más un reel de 30–60 s en formato vertical)","pricing.t2.f3":"2 rondas de revisión","pricing.t2.f4":"Entrega en 15 días hábiles","pricing.t2.cta":"Elegir Recuerdo en Vídeo",
+    "pricing.t3.name":"Vídeo para Pequeños Negocios","pricing.t3.price":"<s>€149</s>","pricing.t3.priceNote":"(precio de lanzamiento para los 3 primeros clientes)",
+    "pricing.t3.desc":"Un rodaje rápido de 1 hora, ideal para pequeños negocios como restaurantes o centros de estética.",
     "pricing.t3.f1":"Rodaje rápido","pricing.t3.f2":"Edición completa en un reel de 30 segundos","pricing.t3.f3":"Entrega en formato horizontal y vertical","pricing.t3.f4":"1 ronda de revisión","pricing.t3.f5":"Entrega en 10 días hábiles","pricing.t3.cta":"Elegir Vídeo para Pequeños Negocios",
     "pricing.note":"Para tomas con dron: reserva con al menos 14 días de antelación para que podamos cumplir con la normativa española y obtener las autorizaciones necesarias. Las tomas con dron no están garantizadas si no conseguimos a tiempo la autorización de las autoridades españolas.",
     "book.eyebrow":"RESERVAR","book.title":"Creemos algo juntos","book.sub":"Cuéntanos sobre tu proyecto y te responderemos en un plazo de 48 horas.",
@@ -789,19 +788,19 @@ const translations = {
     "book.opt1":"Boda","book.opt2":"Marca / Comercial","book.opt3":"Videoclip","book.opt4":"Cortometraje","book.opt5":"Otro",
     "book.date":"Fecha preferida","book.message":"Cuéntanos sobre tu proyecto","book.submit":"Enviar solicitud",
     "book.success":"Gracias — hemos recibido tu solicitud y te contactaremos pronto.",
-    "about.eyebrow":"SOBRE NOSOTROS","about.title":"Un estudio pequeño, mucha atención",
+    "about.eyebrow":"SOBRE NOSOTROS","about.title":"Un estudio de una sola persona, atención cercana, máxima discreción",
     "about.imgPlaceholder":"Añade tu foto aquí",
-    "about.p1":"Frame & Tone fue fundado por dos amigos que no se ponían de acuerdo sobre qué era más importante — la toma o el corte. Así que hacemos ambas cosas. Cada proyecto pasa por las mismas manos desde el primer fotograma hasta la exportación final.",
-    "about.p2":"Trabajamos con luz pastel y color sereno, buscando imágenes que se sientan tranquilas y no ruidosas. Con base en tu ciudad, disponibles en cualquier lugar.",
-    "about.p3":"Cada proyecto recibe el mismo cuidado, ya sea un fin de semana de boda o un rodaje de media jornada para un negocio local. Equipo ligero, montaje rápido y mucha atención a los momentos que realmente importan.",
-    "about.stat1":"Años detrás de la cámara","about.stat2":"Proyectos entregados","about.stat3":"Premios y selecciones",
+    "about.p1":"HORAK MOTION fue fundado por mí, Jan Horak. Me encanta el cine y encontré mi pasión tanto en filmar como en editar vídeo — dos facetas muy distintas pero igual de importantes en el mundo audiovisual. En mi opinión, funciona mejor cuando una sola persona se encarga de ambas cosas, sin tener que explicarle su visión a nadie más para el montaje final. Cada proyecto pasa por las mismas manos, desde el primer fotograma hasta la exportación final.",
+    "about.p2":"Olvídate de las cámaras grandes y el equipo aparatoso. Rodamos solo con una pequeña cámara de bolsillo (DJI Osmo Pocket 4 — primera foto) y un dron (DJI Mini 5 Pro — segunda foto). Gracias a esto, nuestros precios son muy competitivos y nuestra presencia en cada evento muy discreta. Por supuesto, a veces dirigiremos a los invitados para conseguir alguna toma memorable, pero nadie tropezará con nuestro equipo. Con un juego de filtros ND, un ajuste cuidadoso de la cámara y corrección de color en el montaje final, entregamos imágenes que se sienten realmente cinematográficas. No dudes en reservarnos para conseguir un vídeo de tu evento, propiedad o negocio con el aspecto de una película de Netflix. Trabajamos en toda Andalucía, y los gastos de desplazamiento están incluidos en nuestros precios.",
+    "about.p3":"Soy piloto de dron certificado y sigo la normativa española para rodajes con dron. Si quieres incluir tomas aéreas en tu vídeo, reserva con al menos 14 días de antelación para que podamos obtener la autorización de vuelo necesaria.",
+    "about.stat1":"persona detrás de la cámara y del montaje","about.stat2":"semanas desde la primera toma hasta el vídeo final","about.stat3":"minutos de imágenes cinematográficas de tu gran día (para el paquete Recuerdo en Vídeo)",
     "footer.tagline":"Cinematografía y edición, hechas con cuidado.","footer.studio":"Estudio","footer.social":"Redes",
-    "footer.rights":"© 2026 Frame & Tone. Todos los derechos reservados."
+    "footer.rights":"© 2026 HORAK MOTION. Todos los derechos reservados."
   },
   cs: {
     "nav.services":"Služby","nav.samples":"Ukázková videa","nav.pricing":"Ceník","nav.book":"Rezervace","nav.about":"O nás",
     "samples.eyebrow":"UKÁZKOVÁ VIDEA","samples.title":"Podívejte se na naši práci","samples.sub":"Několik nedávných projektů přímo ze střižny.",
-    "samples.v1":"Svatební film","samples.v2":"Cestovatelské video","samples.v3":"Hudební video",
+    "samples.v1":"Narozeninový film","samples.v2":"Cestovatelské video","samples.v3":"Motion design ukázka",
     "hero.rec":"REC","hero.eyebrow":"STUDIO KAMEROVÉ TVORBY A STŘIHU",
     "hero.title1":"Natáčíme okamžik.","hero.title2":"Tvarujeme příběh.",
     "hero.sub":"Malé studio, které tvoří svatební filmy, realitní videa, značkové příběhy a hudební videa — natočené s citem, sestříhané s rytmem.",
@@ -812,11 +811,14 @@ const translations = {
     "services.s3.title":"Korekce barev","services.s3.desc":"Individuální barevné korekce, které dají každému projektu jednotný, filmový vzhled. Chcete, aby vaše video vypadalo jako od Wese Andersona? Žádný problém.",
     "services.s4.title":"Motion a zvuk","services.s4.desc":"Titulky, motion graphics a zvukový design pro dokončení příběhu.",
     "pricing.eyebrow":"CENÍK","pricing.title":"Balíčky","pricing.sub":"Jednoduché ceny, žádné skryté škrty.",
-    "pricing.t1.name":"Video vzpomínka","pricing.t1.desc":"Jeden den nebo večer natáčení, dodaný ve dvou střizích — delší film a krátký sestřih. Ideální pro svatby, firemní večírky a další vícehodinové akce.",
-    "pricing.t1.f1":"Až 6 hodin natáčení","pricing.t1.f2":"2 sestříhaná videa (delší film 3–5 minut, kratší sestřih 30–60 s)","pricing.t1.f3":"2 kola úprav","pricing.t1.f4":"Dodání do 15 pracovních dní","pricing.t1.cta":"Vybrat Video vzpomínku",
-    "pricing.t2.name":"Video propagace","pricing.t2.desc":"Až 3 hodiny natáčení s dotaženým finálním střihem — ideální pro propagační video hotelu nebo nemovitosti.",
-    "pricing.t2.f1":"Natáčení až 3 hodiny","pricing.t2.f2":"1 klip ve vysokém rozlišení na šířku","pricing.t2.f3":"1 sestřih na výšku z hlavního videa — ideální pro Instagram Stories","pricing.t2.f4":"Korekce barev v ceně","pricing.t2.f5":"1 kolo úprav","pricing.t2.f6":"Dodání do 10 pracovních dní","pricing.t2.cta":"Vybrat Video propagaci",
-    "pricing.t3.name":"Video pro malé podniky","pricing.t3.price":"€149","pricing.t3.desc":"Rychlé hodinové natáčení, ideální pro malé podniky jako restaurace nebo kosmetická studia.",
+    "pricing.t1.name":"Video propagace","pricing.t1.priceNote":"(zaváděcí cena pro první 3 zákazníky)",
+    "pricing.t1.desc":"Až 3 hodiny natáčení s dotaženým finálním střihem — ideální pro propagační video hotelu nebo nemovitosti.",
+    "pricing.t1.f1":"Natáčení až 3 hodiny","pricing.t1.f2":"1 klip ve vysokém rozlišení 4K na šířku, v délce zhruba 60 sekund","pricing.t1.f3":"1 sestřih na výšku z hlavního videa — ideální pro Instagram Stories","pricing.t1.f4":"Korekce barev v ceně","pricing.t1.f5":"1 kolo úprav","pricing.t1.f6":"Dodání do 10 pracovních dní","pricing.t1.cta":"Vybrat Video propagaci",
+    "pricing.t2.name":"Video vzpomínka","pricing.t2.priceNote":"(zaváděcí cena pro první 3 zákazníky)",
+    "pricing.t2.desc":"Jeden den nebo večer natáčení, dodaný ve dvou střizích — delší film a krátký sestřih. Ideální pro SVATBY, FIREMNÍ VEČÍRKY, NAROZENINOVÉ OSLAVY a další vícehodinové akce.",
+    "pricing.t2.f1":"Až 6 hodin natáčení","pricing.t2.f2":"2 sestříhaná videa (delší film 3–5 minut ve 4K, plus sestřih 30–60 s ve formátu na výšku)","pricing.t2.f3":"2 kola úprav","pricing.t2.f4":"Dodání do 15 pracovních dní","pricing.t2.cta":"Vybrat Video vzpomínku",
+    "pricing.t3.name":"Video pro malé podniky","pricing.t3.price":"<s>€149</s>","pricing.t3.priceNote":"(zaváděcí cena pro první 3 zákazníky)",
+    "pricing.t3.desc":"Rychlé hodinové natáčení, ideální pro malé podniky jako restaurace nebo kosmetická studia.",
     "pricing.t3.f1":"Rychlé natáčení","pricing.t3.f2":"Kompletní střih do 30sekundového sestřihu","pricing.t3.f3":"Dodání na šířku i na výšku","pricing.t3.f4":"1 kolo úprav","pricing.t3.f5":"Dodání do 10 pracovních dní","pricing.t3.cta":"Vybrat Video pro malé podniky",
     "pricing.note":"U dronových záběrů rezervujte alespoň 14 dní předem, abychom mohli dodržet španělské předpisy a získat potřebná povolení. Dronové záběry nejsou zaručené, pokud se nám nepodaří včas získat povolení od španělských úřadů.",
     "book.eyebrow":"REZERVACE","book.title":"Pojďme něco natočit","book.sub":"Řekněte nám o svém projektu a ozveme se do 48 hodin.",
@@ -825,25 +827,19 @@ const translations = {
     "book.opt1":"Svatba","book.opt2":"Značka / Reklama","book.opt3":"Hudební video","book.opt4":"Krátký film","book.opt5":"Jiné",
     "book.date":"Preferované datum","book.message":"Řekněte nám o svém projektu","book.submit":"Odeslat poptávku",
     "book.success":"Děkujeme — vaši poptávku jsme přijali a brzy se ozveme.",
-    "about.eyebrow":"O NÁS","about.title":"Malé studio, velká pozornost",
+    "about.eyebrow":"O NÁS","about.title":"Malé studio jednoho člověka, osobní přístup, maximální diskrétnost",
     "about.imgPlaceholder":"Sem přidejte svou fotku",
-    "about.p1":"Frame & Tone založili dva kamarádi, kteří se nemohli shodnout, co je důležitější — záběr, nebo střih. Takže děláme obojí. Každý projekt prochází od prvního záběru až po finální export stejnýma rukama.",
-    "about.p2":"Pracujeme v pastelovém světle a tichých barvách a hledáme záběry, které působí klidně, ne hlasitě. Sídlíme ve vašem městě, dostupní kdekoli.",
-    "about.p3":"Každému projektu věnujeme stejnou péči, ať už jde o svatební víkend, nebo půldenní natáčení pro místní podnik. Malé vybavení, rychlá příprava a velký důraz na okamžiky, na kterých skutečně záleží.",
-    "about.stat1":"Let za kamerou","about.stat2":"Dokončených projektů","about.stat3":"Ocenění a výběrů",
+    "about.p1":"HORAK MOTION jsem založil já, Jan Horák. Miluju filmy a našel jsem svou vášeň jak v natáčení, tak ve střihu videa — dvou velmi odlišných, ale stejně důležitých stránkách filmové tvorby. Podle mě funguje nejlépe, když se o obojí stará jeden člověk, který nemusí nikomu vysvětlovat svou vizi finálního střihu. Každý projekt prochází od prvního záběru až po finální export stejnýma rukama.",
+    "about.p2":"Zapomeňte na velké kamery a další nepraktické vybavení. Natáčíme jen na malou kapesní kameru (DJI Osmo Pocket 4 — první foto) a dron (DJI Mini 5 Pro — druhé foto). Díky tomu jsou naše ceny velmi konkurenceschopné a naše přítomnost na každé akci velmi diskrétní. Občas samozřejmě hosty nasměrujeme, abychom zachytili nezapomenutelný záběr, ale o naše vybavení nikdo zakopávat nebude. Díky sadě ND filtrů, pečlivému nastavení kamery a barevné korekci ve finálním střihu dodáváme záběry, které skutečně působí filmově. Neváhejte si nás objednat na video z vaší akce, nemovitosti nebo podnikání, které bude vypadat jako z filmu na Netflixu. Působíme po celé Andalusii a náklady na dopravu jsou zahrnuty v ceně.",
+    "about.p3":"Jsem certifikovaný pilot dronu a při natáčení dronem dodržuji španělské předpisy. Pokud chcete mít ve videu dronové záběry, rezervujte si nás prosím alespoň 14 dní předem, abychom stihli získat potřebné povolení k letu.",
+    "about.stat1":"člověk za kamerou i za střihem","about.stat2":"týdny od prvního záběru po finální video","about.stat3":"minuty filmových záběrů z vašeho velkého dne (u balíčku Video vzpomínka)",
     "footer.tagline":"Kameramanská práce a střih, dělané s péčí.","footer.studio":"Studio","footer.social":"Sítě",
-    "footer.rights":"© 2026 Frame & Tone. Všechna práva vyhrazena."
+    "footer.rights":"© 2026 HORAK MOTION. Všechna práva vyhrazena."
   }
 };
 
-/* ---------------------------------------------------------------
-   Booking availability (Book Us section).
-   Just update the two day-number arrays below whenever your
-   schedule changes — month names and the year update themselves
-   automatically, and switch language automatically too.
---------------------------------------------------------------- */
 const AVAILABILITY = {
-  currentMonthDays: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 30],
+  currentMonthDays: [12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 30],
   nextMonthDays:    [1, 2, 8, 9, 15, 16, 22, 23, 29, 30]
 };
 const MONTH_LOCALES = { en: 'en-US', es: 'es-ES', cs: 'cs-CZ' };
@@ -881,13 +877,11 @@ document.querySelectorAll('[data-langswitch] button').forEach(btn=>{
 });
 
 function detectLanguage(){
-  // Respect a manual choice from a previous visit first
   try{
     const stored = localStorage.getItem('ft_lang');
     if(stored && translations[stored]) return stored;
   }catch(e){}
 
-  // Otherwise infer from the visitor's browser/system language
   const browserLangs = navigator.languages && navigator.languages.length
     ? navigator.languages
     : [navigator.language || navigator.userLanguage || 'en'];
@@ -903,11 +897,6 @@ function detectLanguage(){
 const savedLang = detectLanguage();
 setLanguage(savedLang);
 
-/* ---------------------------------------------------------------
-   Hero background video (YouTube).
-   Swap HERO_VIDEO_ID below for your own YouTube video's ID —
-   the part after "watch?v=" in its URL.
---------------------------------------------------------------- */
 const HERO_VIDEO_ID = "eZYgR3_5-3s";
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -931,7 +920,6 @@ window.onYouTubeIframeAPIReady = function(){
   });
 };
 
-/* sample videos — click a thumbnail to load and autoplay the real embed */
 document.querySelectorAll('.video-embed[data-video-id]').forEach(el=>{
   el.addEventListener('click', function(){
     const id = this.getAttribute('data-video-id');
@@ -949,7 +937,6 @@ document.querySelectorAll('.video-embed[data-video-id]').forEach(el=>{
   }, { once: true });
 });
 
-/* header solid-on-scroll + scrubber fill */
 const header = document.getElementById('siteHeader');
 const fill = document.getElementById('scrubberFill');
 function onScroll(){
@@ -962,7 +949,6 @@ function onScroll(){
 window.addEventListener('scroll', onScroll, {passive:true});
 onScroll();
 
-/* booking form — submits to Formspree without leaving the page */
 document.getElementById('bookForm').addEventListener('submit', function(e){
   e.preventDefault();
   const form = this;
